@@ -7,6 +7,7 @@
   using Sitecore.Data.Items;
   using System;
   using Sitecore.Diagnostics;
+  using Sitecore.Data.Fields;
 
   public class FixSaveItem : IHook
   {
@@ -23,10 +24,14 @@
       {
         try
         {
-          Item saveButtonItem = coreDb.GetItem("{12FF26DE-2BBC-4E60-A43A-735DF841E3CA}");
-          using (new EditContext(saveButtonItem))
+          Item saveButtonItem = coreDb.GetItem("{12FF26DE-2BBC-4E60-A43A-735DF841E3CA}");          
+          Field keyCodeField = saveButtonItem.Fields[new ID("{CCD6BDE9-0A7A-4DA3-B0ED-D3C0F65379FE}")];
+          if (keyCodeField.Value != "")
           {
-            saveButtonItem.Fields[new ID("{CCD6BDE9-0A7A-4DA3-B0ED-D3C0F65379FE}")].Value = "";
+            using (new EditContext(saveButtonItem))
+            {
+              keyCodeField.Value = "";
+            }
           }
         }
         catch (Exception e)
