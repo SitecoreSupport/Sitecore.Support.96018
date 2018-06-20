@@ -34,9 +34,9 @@
             }
           }
         }
-        catch (Exception e)
+        catch (NullReferenceException e)
         {
-          Log.Error("Exception is catched in Sitecore.Support.96018 patch. The error occurred while editing Save button item: ", e, this);
+          Log.Error("NullReferenceException is catched in Sitecore.Support.96018 patch. The error occurred while editing Save button item: ", e, this);
         }
       }
     }
